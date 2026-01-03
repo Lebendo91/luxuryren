@@ -1,25 +1,14 @@
-'use strict';
-'use server';
-
-import { prisma } from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
-
-export async function getSettings() {
-    return await prisma.setting.findMany();
-}
-
-export async function getSettingsByGroup(group: string) {
-    return await prisma.setting.findMany({
-        where: { group }
-    });
-}
-
 export async function getSettingsMap() {
-    const settings = await prisma.setting.findMany();
-    return settings.reduce((acc: Record<string, string>, curr) => {
-        acc[curr.key] = curr.value;
-        return acc;
-    }, {});
+    try {
+        const settings = await prisma.setting.findMany();
+        return settings.reduce((acc: Record<string, string>, curr) => {
+            acc[curr.key] = curr.value;
+            return acc;
+        }, {});
+    } catch (error) {
+        console.error('Error fetching settings:', error);
+        return {};
+    }
 }
 
 export async function getSettingValue(key: string, defaultValue: string = '') {

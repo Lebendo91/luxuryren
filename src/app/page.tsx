@@ -6,10 +6,15 @@ import { ArrowRight } from 'lucide-react';
 import type { Car } from '@prisma/client';
 
 export default async function Home() {
-  const featuredCars = await prisma.car.findMany({
-    take: 3,
-    orderBy: { pricePerDay: 'desc' }
-  });
+  let featuredCars = [];
+  try {
+    featuredCars = await prisma.car.findMany({
+      take: 3,
+      orderBy: { pricePerDay: 'desc' }
+    });
+  } catch (error) {
+    console.error('Error fetching featured cars:', error);
+  }
 
   return (
     <div className="flex flex-col gap-32 pb-32">
