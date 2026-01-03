@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #d4af37;
+  --color-gold-hover: #b5952f;
+  --color-gold-light: #f1e5ac;
+
+  --color-background-dark: #050505;
+  --color-foreground-light: #ffffff;
+
+  --background-image-premium-gradient: linear-gradient(135deg, #d4af37 0%, #f1e5ac 50%, #d4af37 100%);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.5s ease-out forwards;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-slide-right: slide-right 0.5s ease-out forwards;
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.2);
+    }
+
+    100% {
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+    }
+  }
+
+  @keyframes slide-right {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 10, 10, 10;
+}
+
+body {
+  color: white;
+  background: #000;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.text-gradient {
+  background-image: linear-gradient(135deg, #d4af37 0%, #f1e5ac 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  background-color: #d4af37;
+  color: #000;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.btn-premium:hover {
+  transform: scale(1.05);
+  background-color: #f1e5ac;
+}
+
+.letter-spacing-vwide {
+  letter-spacing: 0.3em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* ====== React Day Picker Calendar Overrides ====== */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #d4af37;
+  --rdp-background-color: transparent;
+}
+
+/* Force proper table structure */
+.rdp-months {
+  display: flex !important;
+}
+
+.rdp-month {
+  width: 100%;
+}
+
+.rdp-table {
+  display: table !important;
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 2px !important;
+}
+
+.rdp-thead {
+  display: table-header-group !important;
+}
+
+.rdp-head_row {
+  display: table-row !important;
+}
+
+.rdp-head_cell {
+  display: table-cell !important;
+  width: 40px !important;
+  text-align: center !important;
+  padding: 8px 0 !important;
+  color: #888 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.rdp-tbody {
+  display: table-row-group !important;
+}
+
+.rdp-row {
+  display: table-row !important;
+}
+
+.rdp-cell {
+  display: table-cell !important;
+  width: 40px !important;
+  height: 40px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 2px !important;
+}
+
+/* Day buttons */
+.rdp-day {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 14px !important;
+  transition: all 0.2s !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.rdp-day:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Selected day */
+.rdp-day_selected,
+.rdp-selected .rdp-day_button {
+  background-color: #d4af37 !important;
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+/* Today */
+.rdp-day_today,
+.rdp-today .rdp-day_button {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Disabled days (past dates or reserved) */
+.rdp-day[disabled],
+.rdp-day_disabled,
+.rdp-disabled .rdp-day_button {
+  color: #555 !important;
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through !important;
+}
+
+/* Outside days (previous/next month) */
+.rdp-day_outside,
+.rdp-outside .rdp-day_button {
+  color: #444 !important;
+  opacity: 0.3 !important;
+}
+
+/* Navigation buttons */
+.rdp-nav button,
+.rdp-button_previous,
+.rdp-button_next {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.rdp-nav button:hover,
+.rdp-button_previous:hover,
+.rdp-button_next:hover {
+  background-color: #d4af37 !important;
+  color: #000 !important;
+  border-color: #d4af37 !important;
+}
+
+/* Caption (month/year) */
+.rdp-caption_label,
+.rdp-month_caption {
+  color: #d4af37 !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-size: 14px !important;
+}
