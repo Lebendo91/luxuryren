@@ -3,6 +3,26 @@
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
+export async function getSettings() {
+    try {
+        return await prisma.setting.findMany();
+    } catch (error) {
+        console.error('Error fetching settings:', error);
+        return [];
+    }
+}
+
+export async function getSettingsByGroup(group: string) {
+    try {
+        return await prisma.setting.findMany({
+            where: { group }
+        });
+    } catch (error) {
+        console.error(`Error fetching settings for group ${group}:`, error);
+        return [];
+    }
+}
+
 export async function getSettingsMap() {
     try {
         const settings = await prisma.setting.findMany();
