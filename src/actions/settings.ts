@@ -1,7 +1,12 @@
+'use server';
+
+import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
+
 export async function getSettingsMap() {
     try {
         const settings = await prisma.setting.findMany();
-        return settings.reduce((acc: Record<string, string>, curr) => {
+        return settings.reduce((acc: Record<string, string>, curr: any) => {
             acc[curr.key] = curr.value;
             return acc;
         }, {});
