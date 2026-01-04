@@ -8,10 +8,19 @@ import { getCarReservations } from '@/actions/reservations';
 export default async function CarDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const [car, existingReservations] = await Promise.all([
-        prisma.car.findUnique({ where: { id: id } }),
-        getCarReservations(id)
-    ]);
+    let car = null;
+    let existingReservations = [];
+
+    try {
+        const [carData, reservationsData] = await Promise.all([
+            prisma.car.findUnique({ where: { id: id } }),
+            getCarReservations(id)
+        ]);
+        car = carData;
+        existingReservations = reservationsData;
+    } catch (error) {
+        console.error('Error fetching car details:', error);
+    }
 
     if (!car) {
         return notFound();

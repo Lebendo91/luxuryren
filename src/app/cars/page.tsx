@@ -5,9 +5,14 @@ import type { Car } from '@prisma/client';
 export const dynamic = 'force-dynamic';
 
 export default async function CarsPage() {
-    const cars = await prisma.car.findMany({
-        orderBy: { pricePerDay: 'asc' }
-    });
+    let cars: Car[] = [];
+    try {
+        cars = await prisma.car.findMany({
+            orderBy: { pricePerDay: 'asc' }
+        });
+    } catch (error) {
+        console.error('Error fetching cars:', error);
+    }
 
     return (
         <div className="min-h-screen py-24 px-4 max-w-7xl mx-auto">
